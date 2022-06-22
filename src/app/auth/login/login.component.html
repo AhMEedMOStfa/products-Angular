@@ -1,0 +1,20 @@
+<form #loginForm = 'ngForm' (ngSubmit)="validLogin(loginForm)" class="w-50 mx-auto">
+    <label for="">Email Address</label>
+    <input type="email" class="form-control" required email  #email="ngModel" ngModel name="email">
+
+    <div *ngIf="showError||!email.valid && email.touched">
+        <p class="text-danger" *ngIf="email.errors?.['required']">email address is required</p>
+    </div>
+
+
+    <label for="">Password</label>
+    <input type="password" class="form-control mb-2" required  #password="ngModel" ngModel name="password">
+    <div *ngIf="showError|| !password.valid && password.touched">
+        <p class="text-danger" *ngIf="password.errors?.['required']">password is required</p>
+    </div>
+    <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary d-block ms-auto">login</button>
+</form>
+<div class="mx-auto w-50">
+    don't have account ? 
+    <a routerLink="/auth/register" class="text-unstyled">Register</a>
+</div>

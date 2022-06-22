@@ -1,0 +1,105 @@
+<form [formGroup]="registerForm" (ngSubmit)="validateRegister(registerForm)" class=" w-50 mx-auto">
+
+    <label for="name">Name</label>
+    <input type="text" class="form-control mb-2" formControlName="FullName"  id="name" name="name">
+
+    <div *ngIf="showError|| !registerForm.controls['FullName'].valid&&registerForm.controls['FullName'].touched">
+        <p *ngIf="controlValidation['FullName'].errors?.['required']" class="text-danger">Name is required</p>
+    </div>
+
+    <label for="email">Email</label>
+    <input type="email" class="form-control mb-2" formControlName="Email"  id="email" name="email">
+
+    <div *ngIf="showError|| !registerForm.controls['Email'].valid&&registerForm.controls['Email'].touched">
+        <p *ngIf="controlValidation['Email'].errors?.['required']" class="text-danger">Email is required</p>
+        <p *ngIf="controlValidation['Email'].errors?.['pattern']" class="text-danger">wrong email address</p>
+    </div>
+
+    <label for="name">UserName</label>
+    <input type="text" class="form-control mb-2" formControlName="UserName"  id="UserName" name="UserName">
+
+    <div *ngIf="showError|| !registerForm.controls['UserName'].valid&&registerForm.controls['UserName'].touched">
+        <p *ngIf="controlValidation['UserName'].errors?.['required']" class="text-danger">UserName is required</p>
+        <p *ngIf="controlValidation['UserName'].errors?.['pattern']" class="text-danger">no whitespace</p>
+    </div>
+
+    <label for="password">Password</label>
+    <input type="password" class="form-control mb-2" formControlName="Password"  id="Password" name="Password">
+
+    <div *ngIf="showError|| !registerForm.controls['Password'].valid&&registerForm.controls['Password'].touched">
+        <p *ngIf="controlValidation['Password'].errors?.['required']" class="text-danger">Password required</p>
+        <p *ngIf="controlValidation['Password'].errors?.['pattern']" class="text-danger">not valid password</p>
+    </div>
+
+    <label for="password">Confirm Password</label>
+    <input type="password" class="form-control mb-2" formControlName="ConfirmPassword"  id="ConfirmPassword" name="ConfirmPassword">
+
+    <div *ngIf="showError|| !registerForm.controls['ConfirmPassword'].valid&&registerForm.controls['ConfirmPassword'].touched">
+        <p *ngIf="controlValidation['ConfirmPassword'].errors?.['required']" class="text-danger">ConfirmPassword required</p>
+        <p *ngIf="controlValidation['ConfirmPassword'].errors?.['checkPasswords']" class="text-danger">Password and Confirm Password must be match</p>
+    </div>
+    
+    <!-- address section -->
+    <form formArrayName = 'addressArray'>
+        <div *ngFor="let address of addressData.controls; let i=index">
+            <hr>
+            <button class="btn btn-danger d-block ms-auto" (click)="removeAddress(i)">remove address</button>
+            <div [formGroupName]="i">
+                <h2>Address {{i+1}}</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="item">
+                            <label for="address" class="mb-2">Address</label>
+                            <input type="text" name="address" formControlName = 'address' class=" form-control mb-2" id="address" placeholder="Address">
+                            <div *ngIf="!address.get('address')?.valid && address.get('address')?.touched">
+                                <p *ngIf="address.get('address')?.errors?.['required']" class="text-danger">required</p>
+                                <p *ngIf="address.get('address')?.errors?.['pattern']" class="text-danger">letters numbers only</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="item">            
+                        <label for="address"class="mb-2">street</label>
+                        <input type="text" name="street" class=" form-control mb-2" formControlName = 'street' id="street" placeholder="street">
+                        <div *ngIf="!address.get('street')?.valid && address.get('street')?.touched">
+                            <p *ngIf="address.get('street')?.errors?.['required']" class="text-danger">required</p>
+                            <p *ngIf="address.get('street')?.errors?.['pattern']" class="text-danger">letters numbers only</p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="item">
+                            <label for="address"class="mb-2">city</label>
+                            <input type="text" name="city" class=" form-control mb-2" formControlName = 'city' id="city" placeholder="city">
+                            <div *ngIf="!address.get('city')?.valid && address.get('city')?.touched">
+                                <p *ngIf="address.get('city')?.errors?.['required']" class="text-danger">required</p>
+                                <p *ngIf="address.get('city')?.errors?.['pattern']" class="text-danger">letters only</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="item">
+                            <label for="address"class="mb-2">Country</label>
+                            <input type="text" name="country" class=" form-control mb-2" formControlName = 'country' id="country" placeholder="country">
+                            <div *ngIf="!address.get('country')?.valid && address.get('country')?.touched">
+                                <p *ngIf="address.get('country')?.errors?.['required']" class="text-danger">required</p>
+                                <p *ngIf="address.get('country')?.errors?.['pattern']" class="text-danger">letters only</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+        <button class="d-block ms-auto btn btn-primary" (click)="pushInArray()">add address</button>
+    </form>
+
+
+    <button type="submit" class="btn btn-outline-success w-100 my-2" [disabled]="!registerForm.valid" >Register</button>
+</form>
+
+
+<div class="mx-auto w-50">
+    do you have account ? 
+    <a routerLink="/auth/login" class="text-unstyled">Login</a>
+</div>

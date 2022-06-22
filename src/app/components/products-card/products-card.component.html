@@ -1,0 +1,9 @@
+
+    <div class="card">
+        <img [src]="productData.image" class="card-img-top w-100" alt="...">
+        <div class="card-body">
+          <h5 class="card-title title">{{productData.title}}</h5>
+          <p class="card-text">{{productData.price | customPipe}}</p>
+          <button class="btn btn-primary">add to card</button>
+        </div>
+      </div>

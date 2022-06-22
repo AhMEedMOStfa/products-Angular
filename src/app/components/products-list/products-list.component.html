@@ -1,0 +1,7 @@
+<div class="container py-4"> 
+    <div class="row g-4">
+        <div class="col-md-3"  *ngFor = 'let product of products' >
+        <app-products-card routerLink = '/products-list/products-details/{{product.id}}' [productData] = 'product' ></app-products-card>
+        </div>
+    </div>
+</div>
