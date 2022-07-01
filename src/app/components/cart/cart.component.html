@@ -1,0 +1,43 @@
+<div *ngIf="cartCounter==0;else cartsContent">
+    <h2 class="text-danger text-center ">EmptyCart</h2>
+    <div class="w-50 mx-auto">
+      <img src="../../../assets/img/shopping.jpg" class="image" alt="">
+    </div>
+</div>
+
+<ng-template #cartsContent>
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">title</th>
+            <th scope="col">price</th>
+            <th scope="col">Total price</th>
+            <th scope="col">image</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Remove item</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items ; let i=index">
+            <th scope="row">{{item.id}}</th>
+            <td>{{item.title}}</td>
+            <td>{{item.price | customPipe}}</td>
+            <td>{{item.totalPrice | customPipe}}</td>
+          
+            <td >
+                <img [src]="item.image" alt="">
+            </td>
+            <td>
+              <button class="btn border-0 bg-tansparent me-2" (click)="incQuantity(i)">➕</button>
+              <span >{{item.quantity}}</span>
+              <button class="btn border-0 bg-tansparent ms-2" (click)="decQuantity(i)" [disabled]="!item.quantity">➖</button>
+            </td>
+            <td>
+              <button class="btn btn-outline-danger" (click)="removeItem(i)">remove</button>
+            </td>
+          </tr>
+          <!-- <h2>Total Price : <span>{{totalPrice | customPipe}}</span></h2> -->
+        </tbody>
+      </table>
+</ng-template>

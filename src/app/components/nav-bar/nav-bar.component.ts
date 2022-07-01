@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from 'src/app/cart.service';
+import { LoaderService } from 'src/app/loader.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor() { }
+  cartCounter:number=0;
+  constructor(private _counterCart:CartService, public LoaderService:LoaderService) {
+   this._counterCart.getCounter().subscribe((res)=>{
+      // console.log(res);
+      this.cartCounter=res;
+    })
+   }
 
   ngOnInit(): void {
   }

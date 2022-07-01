@@ -24,6 +24,9 @@ export class RegisterComponent implements OnInit {
   constructor(private fb:FormBuilder) { 
     
   }
+  ngOnInit(): void {
+  }
+  //address form
   get addressData():FormArray
   {
     return this.registerForm.get('addressArray') as FormArray;
@@ -39,28 +42,26 @@ export class RegisterComponent implements OnInit {
   
   pushInArray()
   {
-    this.addressData.push(this.addAddress());
-    console.dir(this.addressData);
-     
+    this.addressData.push(this.addAddress());     
   }
   removeAddress(i:number)
   {
     this.addressData.removeAt(i);
   }
 
+  //register form
 
   get controlValidation()
   {
     return this.registerForm.controls;
   }
-  ngOnInit(): void {
-  }
+
   validateRegister(data:object)
   {
-    console.log(data);
     this.showError = true;
   }
 
+  //custom validation for password & confirm password ??
   checkPasswords(password:string , confirmPassword:string)
   {
     return (formgroup:FormGroup)=>

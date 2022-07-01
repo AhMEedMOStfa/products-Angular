@@ -1,9 +1,17 @@
 
-    <div class="card">
-        <img [src]="productData.image" class="card-img-top w-100" alt="...">
-        <div class="card-body">
-          <h5 class="card-title title">{{productData.title}}</h5>
-          <p class="card-text">{{productData.price | customPipe}}</p>
-          <button class="btn btn-primary">add to card</button>
-        </div>
-      </div>
+<div class="card">
+  <div routerLink = '/products-list/products-details/{{productData.id}}'>
+    <img [src]="productData.images" class="card-img-top w-100" alt="...">
+    <div class="card-body">
+      <h5 class="card-title title">{{productData.title}}</h5>
+      <p class="card-text">{{productData.price | customPipe}}</p>
+    </div>
+  </div>
+  <div class="d-flex">
+    <button class="btn btn-primary w-50 me-3" (click)="addCart(productData)">add to card</button>
+    <button class="btn w-50" [ngClass]="btnClicked==false ?'wishlist-btn-clicked':'wishlist-btn'"
+    (click)="addWishList(productData.id, productData.images ,productData.title)">WishList</button>
+  </div>
+
+</div>
+  

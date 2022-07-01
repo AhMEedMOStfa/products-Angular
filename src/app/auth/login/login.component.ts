@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginGuard } from 'src/app/login.guard';
+import { LoginService } from 'src/app/login.service';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
 
   showError:boolean = false
-  constructor() { }
+  constructor(private loginGuard:LoginGuard , private loginService:LoginService) { }
 
   ngOnInit(): void {
   }
@@ -16,6 +18,11 @@ export class LoginComponent implements OnInit {
   {
     console.log(data);
     this.showError = true;
+  }
+
+  loginFn(data:object)
+  {
+    this.loginService.login(data);
   }
 
 }

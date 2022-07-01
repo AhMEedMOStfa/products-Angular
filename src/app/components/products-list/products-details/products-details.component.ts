@@ -3,6 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/product';
 import { ProductsListComponent } from '../products-list.component';
 import { productList } from 'src/app/productList';
+import { ProductsService } from 'src/app/products.service';
+import { CartService } from 'src/app/cart.service';
+import { LoaderService } from 'src/app/loader.service';
 @Component({
   selector: 'app-products-details',
   templateUrl: './products-details.component.html',
@@ -10,22 +13,24 @@ import { productList } from 'src/app/productList';
 })
 export class ProductsDetailsComponent implements OnInit {
 
-  products:Array<Product> = productList;
 
   productId: any;
   product:any;
-  constructor(private activatedRoute:ActivatedRoute) { }
+  constructor(private activatedRoute:ActivatedRoute ,private _product:ProductsService , private __productCounter:CartService,public LoaderService:LoaderService) { }
 
   ngOnInit(): void {
     this.productId = this.activatedRoute.snapshot.paramMap.get('id');
-    console.log(this.productId);
-
-    this.product = this.products.find(prod=>{
-      return prod.id==this.productId;
-    })
-
-    console.log(this.product);
-    
+    this._product.getProductById(this.productId).subscribe(
+      ((prod:any)=>{
+        console.log(this.productId);
+        console.log(prod);
+        this.product = prod;
+      })
+    )  
+  }
+  addCart()
+  {
+    this.__productCounter.addCarts(this.product);
   }
 
 }

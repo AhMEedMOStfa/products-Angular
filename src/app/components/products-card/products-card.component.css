@@ -1,13 +1,14 @@
-img
-{
-    height: 400px;
-}
 .card
 {
     cursor: pointer;
     border: none;
-    box-shadow: 3px 8px 10px 3px rgba(0, 0, 0, 0.485);}
-.title
+    box-shadow: 3px 8px 10px 3px rgba(0, 0, 0, 0.485);
+}
+.wishlist-btn-clicked
 {
-    height: 55px;
+    background-color: orange;
+}
+.wishlist-btn
+{
+    background-color: grey;
 }

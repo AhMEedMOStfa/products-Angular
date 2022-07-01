@@ -12,7 +12,7 @@
     <div *ngIf="showError|| !password.valid && password.touched">
         <p class="text-danger" *ngIf="password.errors?.['required']">password is required</p>
     </div>
-    <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary d-block ms-auto">login</button>
+    <button type="submit" [disabled]="!loginForm.valid" (click)="loginFn(loginForm)" class="btn btn-primary d-block ms-auto">login</button>
 </form>
 <div class="mx-auto w-50">
     don't have account ? 
